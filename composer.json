@@ -1,0 +1,17 @@
+{
+    "name": "toto/mrl-septem-trionis",
+    "description": "Gestion du Septem Trionis",
+    "type": "project",
+    "license": "GPL",
+    "authors": [
+        {
+            "name": "KetchupLardon",
+            "email": "axel.gudolle@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {"Inc\\": "./Inc"}
+    }
+}
