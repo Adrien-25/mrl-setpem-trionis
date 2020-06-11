@@ -3,7 +3,7 @@
  * @package MRLSeptemTrionis
  */
 
-namespace Inc\Base;
+namespace Septem\Base;
 
 class Deactivate
 {

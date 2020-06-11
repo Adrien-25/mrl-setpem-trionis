@@ -3,12 +3,12 @@
  * @package MRLSeptemTrionis
  */
 
-namespace Inc\Pages;
+namespace Septem\Pages;
 
-use \Inc\Base\BaseController;
-use \Inc\API\SettingsApi;
-use \Inc\API\Callbacks\AdminCallbacks;
-use \Inc\API\Callbacks\ManagerCallbacks;
+use \Septem\Base\BaseController;
+use \Septem\API\SettingsApi;
+use \Septem\API\Callbacks\AdminCallbacks;
+use \Septem\API\Callbacks\ManagerCallbacks;
 
 class Dashboard extends BaseController
 {

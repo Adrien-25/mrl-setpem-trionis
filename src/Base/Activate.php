@@ -3,12 +3,13 @@
  * @package MRLSeptemTrionis
  */
 
-namespace Inc\Base;
+namespace Septem\Base;
 
 class Activate
 {
     public static function activate(){
         flush_rewrite_rules();
+        var_dump(__METHOD__);
 
         if (get_option( 'mrl_plugin_septem' )){
             return;

@@ -6,9 +6,9 @@
  * dans le Dashboard
  */
 
-namespace Inc\API\Callbacks;
+namespace Septem\API\Callbacks;
 
-use \Inc\Base\BaseController;
+use \Septem\Base\BaseController;
 
 class AdminCallbacks extends BaseController
 {

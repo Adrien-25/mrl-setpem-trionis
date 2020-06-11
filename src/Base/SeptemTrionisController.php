@@ -3,11 +3,11 @@
  * @package MRLSeptemTrionis
  */
 
-namespace Inc\Base;
+namespace Septem\Base;
 
-use \Inc\API\SettingsApi;
-use \Inc\Base\BaseController;
-use \Inc\API\Callbacks\AdminCallbacks;
+use \Septem\API\SettingsApi;
+use \Septem\Base\BaseController;
+use \Septem\API\Callbacks\AdminCallbacks;
 
 class SeptemTrionisController extends BaseController
 {
@@ -26,20 +26,6 @@ class SeptemTrionisController extends BaseController
         $this->settings = new SettingsApi;
         $this->setSubpages();
         $this->settings->addSubPages($this->subpages)->register();
-
-        add_shortcode( 'septemtrionis-front', [$this, 'septemtrionis_front'] );
-    }
-
-    public function septemtrionis_front()
-    {
-        ob_start();
-
-        echo "<link rel=\"stylesheet\"  href=\"$this->plugin_url/assets/mrlseptemtrionis.css\"></link>";
-
-        require_once( "$this->plugin_path/templates/septemtrionis-front.php" );
-
-        return ob_get_clean();
-
     }
 
     public function setSubpages(){

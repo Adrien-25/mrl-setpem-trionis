@@ -9,10 +9,10 @@ Description: Gére le compteur de Septem Trionis.
 Version: 1.0.0
 Author: Axel
 */
-
+use Septem\Base;
 //check si le plugin est utilisé par wordpress
-if( ! defined('ABSPATH') ){
-    die( "You're wrong" );
+if( ! defined( 'ABSPATH' ) ){
+    die;
 }
 
 //check si l'autoload est valide pour les namespace
@@ -24,17 +24,18 @@ if ( file_exists( dirname( __FILE__ ) . '/vendor/autoload.php' ) ) {
 //activation et deactivation du plugin
 
 function activate_mrl_septem(){
-    Inc\Base\Activate::activate();
+    Activate::activate();
 }
 register_activation_hook( __FILE__, 'activate_mrl_septem' );
 
 function deactivate_mrl_septem(){
-    Inc\Base\Deactivate::deactivate();
+    Deactivate::deactivate();
 }
 register_deactivation_hook( __FILE__, 'deactivate_mrl_septem' );
 
 
 //initialisation du Plugin
-if (class_exists( 'Inc\\Init' ) ) {
-    Inc\Init::register_services();
+if (class_exists( 'Septem\\Init' ) ) {
+    \Septem\Init::register_services();
+    // echo "hi";
 }

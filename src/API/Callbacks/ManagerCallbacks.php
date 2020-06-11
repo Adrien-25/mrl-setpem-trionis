@@ -3,9 +3,9 @@
  * @package MRLSeptemTrionis
  */
 
-namespace Inc\API\Callbacks;
+namespace Septem\API\Callbacks;
 
-use \Inc\Base\BaseController;
+use \Septem\Base\BaseController;
 
 class ManagerCallbacks extends BaseController
 {

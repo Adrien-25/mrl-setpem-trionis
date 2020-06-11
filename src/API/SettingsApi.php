@@ -3,7 +3,7 @@
  * @package MRLSeptemTrionis
  */
 
-namespace Inc\API;
+namespace Septem\API;
 
 class SettingsApi
 {

@@ -3,9 +3,9 @@
  * @package MRLSeptemTrionis
  */
 
-namespace Inc;
+namespace Septem;
 
-final class Init
+class Init
 {
     /**
      * Store all the classes inside an array

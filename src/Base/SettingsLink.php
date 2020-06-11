@@ -3,9 +3,9 @@
  * @package MRLSeptemTrionis
  */
 
-namespace Inc\Base;
+namespace Septem\Base;
 
-use \Inc\Base\BaseController;
+use \Septem\Base\BaseController;
 
 class SettingsLink extends BaseController
 {
