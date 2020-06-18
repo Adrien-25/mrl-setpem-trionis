@@ -18,7 +18,7 @@ class Init
             
             Pages\Dashboard::class,
             Base\Enqueue::class,
-            Base\SettingsLink::class,
+            // Base\SettingsLink::class,
             Base\SeptemTrionisController::class,
         ];
     }

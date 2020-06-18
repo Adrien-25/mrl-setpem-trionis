@@ -20,13 +20,6 @@ window.addEventListener("load", function(){
     }
 
 
-    // let auditeurSearch = document.getElementById('auditeurSearch');
-    // console.log(auditeurSearch);
-    // if(auditeurSearch){
-    //     auditeurSearch.addEventListener('keyup', (e) => {
-    //         let filteredAuditeurs = e.target.value;
-    //     });
-    // }
     
     // load_data();    
     // function load_data(page){
@@ -59,38 +52,33 @@ window.addEventListener("load", function(){
 });
     
 jQuery(document).ready( function($) {
-    load_data();
-    function load_data(page){
+
+    load_data(1);
+    function load_data(page, query = ''){
         $.ajax({
             url: my_ajax_object.ajax_url,
             method:"POST",
-            data:{page:page},
-            success:function(data){
-                $('.septem-container').html(data);
+            data: {page:page, query:query},
+            success: function (data) {
+                $('#septem-container').html(data);
             }
-        })
+        });
     }
 
-    $(document).on('click', '.pagination_link', function(){
-        console.log('ef');
-        var page = $(this).attr("id");
-        load_data(page);
-    })
+    $(document).on('click', '.page-link', function(event){
+        var page = $(this).data('page_number');
+        var query = $('#auditeurSearch').val();
+        if($(event.target).attr('class') == "page-link active"){
+            return;
+        };
+        if($(event.target).attr('class') == "page-link dot"){
+            return;
+        };
+        load_data(page, query);
+    });
 
     $('#auditeurSearch').keyup(function(){
-        var txt = $(this).val();
-        if(txt != ''){
-
-        } else {
-            $.ajax({
-                url: my_ajax_object.ajax_url_searchbar,
-                method:"POST",
-                data:{search:txt},
-                success:function(data){
-                    $('.septem-container').html(data);
-                }
-            })
-        }
-    })
-
+        var query = $('#auditeurSearch').val();
+        load_data(1, query);
+    });
 });
