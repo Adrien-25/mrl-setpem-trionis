@@ -95,6 +95,23 @@
     text-align: center;
 }
 
+.septem-controls{
+    display: flex;
+    flex-direction: row;
+    justify-content:center;
+    align-items: center;
+}
+
+.plus{
+    margin:12px;
+    cursor: pointer;
+}
+
+.minus{
+    cursor:pointer;
+    margin:12px;
+}
+
 .pagination{
     display: flex;
     flex-direction: row;
@@ -121,4 +138,8 @@
 .active{
     font-weight: bolder;
     transform: scale(1.25, 1.25);
+}
+
+.septem-hebdo{
+    width:10%;
 }

@@ -52,13 +52,15 @@ window.addEventListener("load", function(){
 });
     
 jQuery(document).ready( function($) {
+    let updateValue;
+    let updated;
 
     load_data(1);
-    function load_data(page, query = ''){
+    function load_data(page, query = '', update_value = '', update_id = ''){
         $.ajax({
             url: my_ajax_object.ajax_url,
             method:"POST",
-            data: {page:page, query:query},
+            data: {page:page, query:query, update_value:update_value, update_id:update_id},
             success: function (data) {
                 $('#septem-container').html(data);
             }
@@ -81,4 +83,26 @@ jQuery(document).ready( function($) {
         var query = $('#auditeurSearch').val();
         load_data(1, query);
     });
+
+    $(document).on('click', '.js_control', function(e){
+        let classes = $(e.target).attr('class');
+        let classe = classes.split(' ');
+        let updateId = classe[1];
+        let control = classe[0];
+        let hebdoArray = $('.septem-hebdo');
+        let page = $('.js_active').data('active_page');
+        console.log(page);
+        hebdoArray.each(function(){
+            if(this.id == updateId){
+                if(control === 'plus'){
+                    updateValue = ++this.value;
+                } else if(control === 'minus' && this.value != 0){
+                    updateValue = --this.value;
+                }
+                load_data(page, '', updateValue, updateId );
+            }
+        });
+        
+    });
+
 });

@@ -63,12 +63,19 @@ if($_POST['page'] > 1 ){                        //Si le numéro d'une page a ét
 } else {
     $start = 0;                                 //Si l'utilisateur n'a pas selectionné de page, on reste sur la page 1 et on récupère les donné depuis le premier auditeur
 }
+// var_dump($_POST);
 
 //On récupère les données voulu dans la table voulu
-$query = "SELECT nom, ville, septem_hebdo, septem_full FROM auditeurs_membres ";
+$query = "SELECT id, nom, ville, septem_hebdo, septem_full FROM auditeurs_membres ";
 
-if(isset($_POST['query'])){                      //Si on a une query de l'utilisateur c'est qu'il a séléctionné une page ou recherche dan la searchbar
+if(isset($_POST['query'])){                      //Si on a un $_POST['query'] de l'utilisateur c'est qu'il a séléctionné une page ou recherche dan la searchbar
     $query .= 'WHERE nom LIKE "%'.str_replace(' ', '%', $_POST['query']).'%" ';
+}
+
+if(isset($_POST['update_value']) && isset($_POST['update_id']) && $_POST['update_value'] !== ''){
+    $update = 'UPDATE auditeurs_membres SET septem_hebdo = '.$_POST["update_value"].' WHERE id = '.$_POST["update_id"];
+    // var_dump($update);
+    $req = $connect->query($update);
 }
 
 $query .= 'ORDER BY nom ASC ';
@@ -84,8 +91,14 @@ if($total_data > 0){
         $output .= '
         <div class="septem-auditeurs">
                 <div class="septem-item">'.htmlspecialchars(utf8_encode($row["nom"])).'</div>
-                <div class="septem-item">'.htmlspecialchars(utf8_encode($row["ville"])).'</div>
-                <div class="septem-item">'.htmlspecialchars(utf8_encode($row["septem_hebdo"])).'</div>
+                <div class="septem-item">'
+                    .htmlspecialchars(utf8_encode($row["ville"])).
+                    '</div>
+                <div class="septem-item septem-controls">
+                    <div class="minus '.htmlspecialchars(utf8_encode($row["id"])).' js_control">-</div>
+                    <input type="text" class="septem-hebdo" id="'.htmlspecialchars(utf8_encode($row["id"])).'" value="'.htmlspecialchars(utf8_encode($row["septem_hebdo"])).'" disabled>
+                    <div class="plus '.htmlspecialchars(utf8_encode($row["id"])).' js_control">+</div>
+                </div>
                 <div class="septem-item">'.htmlspecialchars(utf8_encode($row["septem_full"])).'</div>
         </div>
         ';
@@ -142,7 +155,7 @@ for($count = 0; $count < count($page_array); $count++){
     if($page == $page_array[$count]){
         $page_link .= '
         <li class="page-item active">
-            <a class="page-link active" href="#">'.$page_array[$count].'</a>
+            <a class="page-link js_active" data-active_page='.$page_array[$count].' href="#">'.$page_array[$count].'</a>
         </li>
         ';
         $previous_id = $page_array[$count] - 1;
