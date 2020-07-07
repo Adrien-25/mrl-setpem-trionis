@@ -4,7 +4,7 @@ include('../../vendor/autoload.php');
 use \Septem\Model\DataBase;
 //Connection à la base de donnée
 $connect = Database::dbConnect();
-$weekSeptem = date('W', strtotime("-1 week")); 
+$weekSeptem = date('W', strtotime("-1 week"));
 $actualWeek = date('W');                        //Numéro de semaine
 $year = date('Y');                              //Année actuel
 $limit = 8;                                     //Nombre limite de personne à afficher par page
@@ -16,12 +16,14 @@ if($_POST['page'] > 1 ){                        //Si le numéro d'une page a ét
 } else {
     $start = 0;                                 //Si l'utilisateur n'a pas selectionné de page, on reste sur la page 1 et on récupère les donné depuis le premier auditeur
 }
+$weekCheck = $connect->query("SELECT numSemaine FROM Septem_Trionis LIMIT 1")->fetch(PDO::FETCH_NUM)[0];
 
-// $weekCheck = "SELECT numSemaine FROM Septem_Trionis LIMIT 1";
-
-// if($week){
-
-// }
+if($weekSeptem == $weekCheck){
+    $historic = 'INSERT INTO Historique_Septem (numSemaine, nbAppelsSemaine, annee, auditeur_idAuditeur) SELECT numSemaine, nbAppelsSemaine, annee, auditeur_idAuditeur FROM Septem_Trionis';
+    $connect->query($historic);
+    $deleteSeptem = 'DELETE FROM Septem_Trionis';
+    $connect->query($deleteSeptem);
+}
 //On récupère les données voulu dans la table voulu
 $query = "SELECT Auditeurs.idAuditeur, Auditeurs.idAuditeur, Auditeurs.nom, Auditeurs.ville, Auditeurs.age, Septem_Trionis.numSemaine, Septem_Trionis.nbAppelsSemaine, Septem_Trionis.annee FROM Auditeurs LEFT JOIN Septem_Trionis ON Auditeurs.idAuditeur = Septem_Trionis.auditeur_idAuditeur ";
 
