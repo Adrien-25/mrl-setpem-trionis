@@ -36,7 +36,7 @@
 
 .tab-content > .tab-pane{
     float: left;
-    width:100%;
+    width:50%;
     display:none;
 }
 
@@ -74,7 +74,7 @@
 }
 
 .septem-header{
-    width:25%;
+    width:16%;
     text-align: center;
 
 }
@@ -91,7 +91,7 @@
 }
 
 .septem-item{
-    width:25%;
+    width:16%;
     text-align: center;
 }
 
@@ -135,11 +135,19 @@
     color: rgb(53, 53, 53);
 }
 
-.active{
+.septem-active{
     font-weight: bolder;
     transform: scale(1.25, 1.25);
 }
 
 .septem-hebdo{
-    width:10%;
+    width:17%;
+}
+
+#septem-podium{
+    border-bottom: 2px solid lightgrey;
+}
+
+#auditeurSearch{
+    margin:10px;
 }

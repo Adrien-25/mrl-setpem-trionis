@@ -18,49 +18,19 @@ window.addEventListener("load", function(){
         clickedTab.classList.add("active");
         document.querySelector(activePaneID).classList.add("active");
     }
-
-
-    
-    // load_data();    
-    // function load_data(page){
-    //     let xhr = new XMLHttpRequest();
-
-    //     xhr.open('POST', my_ajax_object.ajax_url, true);
-
-    //     xhr.onload = function(){
-    //         if(this.status == 200){
-    //             let data = this.responseText;
-    //             document.querySelector('.septem-container').innerHTML = data;
-    //         }
-    //     }
-
-    //     xhr.send("page=" + page);
-    // }
-    
-
-    // let paginationButtons = document.getElementsByClassName('pagination_link');
-    // console.log(paginationButtons);
-    // for(let j = 0; j < paginationButtons.length; j++){
-    //     console.log(paginationButtons.item(j));
-    //     paginationButtons[j].addEventListener('click', (e) => {
-    //         console.log('ef');
-    //         var page = e.target.getAttribute("id");
-    //         load_data(page);
-    //     })
-    // }
     
 });
     
 jQuery(document).ready( function($) {
     let updateValue;
-    let updated;
 
     load_data(1);
-    function load_data(page, query = '', update_value = '', update_id = ''){
+    function load_data(page, query = '', update_value = '', update_id = '', actual_value = ''){
         $.ajax({
             url: my_ajax_object.ajax_url,
             method:"POST",
-            data: {page:page, query:query, update_value:update_value, update_id:update_id},
+            //data = ce qu'on peut récupérer en $_POST
+            data: {page:page, query:query, update_value:update_value, update_id:update_id, actual_value:actual_value},
             success: function (data) {
                 $('#septem-container').html(data);
             }
@@ -79,11 +49,14 @@ jQuery(document).ready( function($) {
         load_data(page, query);
     });
 
+    /*On récupère les lettres tapé dans la barre de recherche et on les envoie en $_POST
+    pour pouvoir les récupérer avec PHP et voir si ça match avec certians élement de la base de donnés*/
     $('#auditeurSearch').keyup(function(){
         var query = $('#auditeurSearch').val();
         load_data(1, query);
     });
 
+    //Ajoute/supprime les points de septem
     $(document).on('click', '.js_control', function(e){
         let classes = $(e.target).attr('class');
         let classe = classes.split(' ');
@@ -91,18 +64,19 @@ jQuery(document).ready( function($) {
         let control = classe[0];
         let hebdoArray = $('.septem-hebdo');
         let page = $('.js_active').data('active_page');
-        console.log(page);
+        let actualValue;
+        console.log(hebdoArray);
         hebdoArray.each(function(){
             if(this.id == updateId){
+                actualValue = this.value;
                 if(control === 'plus'){
                     updateValue = ++this.value;
-                } else if(control === 'minus' && this.value != 0){
+                } else if(control === 'minus' && actualValue != 0){
                     updateValue = --this.value;
                 }
-                load_data(page, '', updateValue, updateId );
+                load_data(page, '', updateValue, updateId, actualValue );
             }
         });
         
     });
-
 });

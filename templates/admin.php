@@ -1,5 +1,5 @@
 <div class="wrap">
-    <h1>Bibi Plugin</h1>
+    <h1>MRL Septem Plugin</h1>
     <?php settings_errors()?>
 
     <ul class="nav nav-tabs">

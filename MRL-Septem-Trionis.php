@@ -10,6 +10,8 @@ Version: 1.0.0
 Author: Axel
 */
 use Septem\Base;
+use Septem\Base\Activate;
+use Septem\Base\Deactivate;
 //check si le plugin est utilisé par wordpress
 if( ! defined( 'ABSPATH' ) ){
     die;
@@ -37,5 +39,4 @@ register_deactivation_hook( __FILE__, 'deactivate_mrl_septem' );
 //initialisation du Plugin
 if (class_exists( 'Septem\\Init' ) ) {
     \Septem\Init::register_services();
-    // echo "hi";
 }
