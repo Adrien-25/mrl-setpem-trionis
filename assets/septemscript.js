@@ -38,8 +38,8 @@ jQuery(document).ready( function($) {
     }
 
     $(document).on('click', '.page-link', function(event){
-        var page = $(this).data('page_number');
-        var query = $('#auditeurSearch').val();
+        let page = $(this).data('page_number');
+        let query = $('#auditeurSearch').val();
         if($(event.target).attr('class') == "page-link active"){
             return;
         };
@@ -52,7 +52,7 @@ jQuery(document).ready( function($) {
     /*On récupère les lettres tapé dans la barre de recherche et on les envoie en $_POST
     pour pouvoir les récupérer avec PHP et voir si ça match avec certians élement de la base de donnés*/
     $('#auditeurSearch').keyup(function(){
-        var query = $('#auditeurSearch').val();
+        let query = $('#auditeurSearch').val();
         load_data(1, query);
     });
 

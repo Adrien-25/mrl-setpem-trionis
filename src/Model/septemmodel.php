@@ -4,7 +4,7 @@ include('../../vendor/autoload.php');
 use \Septem\Model\DataBase;
 //Connection à la base de donnée
 $connect = Database::dbConnect();
-$weekSeptem = date('W', strtotime("-1 week"));
+$weekSeptem = date('W', strtotime("-1 week"));  //Renvoi la semaine actuel moins 1
 $actualWeek = date('W');                        //Numéro de semaine
 $year = date('Y');                              //Année actuel
 $limit = 8;                                     //Nombre limite de personne à afficher par page
@@ -140,7 +140,7 @@ if($total_links > 4){
 
 //Resultat en HTML
 for($count = 0; $count < count($page_array); $count++){
-    //On ajoute la class cs active à la page actuelle pour la différencier des autres
+    //On ajoute la class css active à la page actuelle pour la différencier des autres
     if($page == $page_array[$count]){
         $page_link .= '
         <li class="page-item septem-active">

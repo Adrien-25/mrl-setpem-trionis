@@ -3,16 +3,14 @@ include(__DIR__.'/../vendor/autoload.php');
 use \Septem\Model\DataBase;
 $connect = DataBase::dbConnect();
 $podium = DataBase::septemPodium($connect);
+$columnNames = ['Nom', 'Ville', 'Âge', 'Septem', 'Année', 'Numéro de semaine'];
 ?>
 <div class='septem-containers'>
-<h2 class="septem-title">Gestion du Septem Trionis</h2>
+<h2 class="septem-title">Podium Septem Trionis</h2>
     <div class="septem-headers">
-        <div class="septem-header">Nom</div>
-        <div class="septem-header">Ville</div>
-        <div class="septem-header">Age</div>
-        <div class="septem-header">Septem Hebdomadaire</div>
-        <div class="septem-header">Année</div>
-        <div class="septem-header">Numéro de semaine</div>
+        <?php foreach($columnNames as $columnName):?>
+            <div class="septem-header"><?= $columnName?></div>
+        <?php endforeach?>
     </div>
     <div id='septem-podium'>
         <?php foreach($podium as $row):?>
@@ -26,7 +24,13 @@ $podium = DataBase::septemPodium($connect);
             </div>
         <?php endforeach?>
     </div>
+    <h2 class="septem-title">Liste des auditeurs</h2>
     <input type="text" name="auditeurSearch" id="auditeurSearch" placeholder="rechercher un auditeur">
+    <div class="septem-headers">
+        <?php foreach($columnNames as $columnName):?>
+            <div class="septem-header"><?= $columnName?></div>
+        <?php endforeach?>
+    </div>
     <div id='septem-container'>
     
     </div>
